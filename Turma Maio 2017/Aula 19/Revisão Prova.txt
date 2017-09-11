@@ -1,1 +1,11 @@
 Conteudo ....
+
+se
+somase
+somases
+tabela dinamica
+formatação condicional
+
+lista suspensa com validação de dados
+segmentação de dados
+fazer umgrafico com segmentação
