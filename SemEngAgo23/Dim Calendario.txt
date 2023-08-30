@@ -1,0 +1,18 @@
+let
+    /* RETORNA A MENOR DATA DE UMA COLUNA DE UMA TABELA*/
+    MENOR_DATA = List.Min(Fato_Vendas[Data]),
+
+    /* RETORNA A MAIOR DATA DE UMA COLUNA DE UMA TABELA*/ 
+    MAIOR_DATA = List.Max(Fato_Orçado[Data]),
+    
+    /* CALCULA A DURAÇÃO EM DIAS */
+    DURACAO = Duration.Days(MAIOR_DATA - MENOR_DATA)+1, 
+
+    /* INICIA UMA CONTAGEM INCREMENTAL DE DIAS A PARTIR DE UMA DATA INICIAL */
+    Datas = List.Dates(MENOR_DATA,DURACAO,#duration(1,0,0,0)),
+
+    #"Convertido para Tabela" = Table.FromList(Datas, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+    #"Colunas Renomeadas" = Table.RenameColumns(#"Convertido para Tabela",{{"Column1", "Datas"}}),
+    #"Tipo Alterado" = Table.TransformColumnTypes(#"Colunas Renomeadas",{{"Datas", type date}})
+in
+    #"Tipo Alterado"
